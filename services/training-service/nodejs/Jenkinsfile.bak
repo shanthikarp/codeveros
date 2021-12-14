@@ -80,9 +80,6 @@ podTemplate(
             CHART_PACKAGE="\$(helm package ${chartPath} | cut -d":" -f2 | tr -d '[:space:]')"
              curl -u $REPO_USER:$REPO_PASS ${helmRepoUrl} --upload-file \$CHART_PACKAGE -v
              """
-            }
-            }
-            }
-        }
     }
-    }
+  }
+}
