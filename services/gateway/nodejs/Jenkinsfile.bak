@@ -1,6 +1,6 @@
-def servicePath = 'services/training-service/nodejs'
-def chartPath = 'charts/codeveros-training-service'
-def imageRepo = 'coveros/codeveros-training-service'
+def servicePath = 'services/user-service/nodejs'
+def chartPath = 'charts/codeveros-user-service'
+def imageRepo = 'coveros/codeveros-user-service'
 def helmRepoUrl = 'http://172.31.49.218:30002/repository/helm-private/'
 def dockerRegistry = '172.31.49.218:30006'
 
@@ -76,6 +76,7 @@ podTemplate(
             )
             ]) {
             sh """
+            cd /home/jenkins/agent/workspace/user-service
             helm lint ${chartPath}
             apk --no-cache add curl
              helm dependency build ${chartPath}
