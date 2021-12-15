@@ -1,2 +1,42 @@
 def helmRepoUrl = 'http://172.31.49.218:30002/repository/helm-private/'
 def chartPath = 'charts/codeveros'
+
+podTemplate(containers: [
+  containerTemplate(
+    name: 'helm',
+    image: 'alpine/helm:3.5.0',
+    command: 'cat',
+    ttyEnabled: true
+  )
+]) {
+  node(POD_LABEL) {
+     stage('Checkout code') {
+      checkout scm
+                            }
+     container('helm') {
+       stage('Build Helm Chart') {
+    withCredentials([
+      usernamePassword(
+        usernameVariable: 'REPO_USER',
+        passwordVariable: 'REPO_PASS',
+        credentialsId: 'nexus-user'
+      )
+    ]) {
+      sh """
+        helm lint ${chartPath}
+        apk --no-cache add curl
+        helm dependency build ${chartPath}
+        CHART_PACKAGE="\$(helm package ${chartPath} | cut -d":" -f2 | tr -d '[:space:]')"
+        curl -u $REPO_USER:$REPO_PASS ${helmRepoUrl} --upload-file \$CHART_PACKAGE -v
+      """
+     }
+     }
+     }
+     stage('Build Helm Chart') {}
+     stage('Deploy Chart') {
+      sh "helm repo add nexus ${helmRepoUrl}"
+       sh 'helm repo update'
+      sh 'helm upgrade --install --wait --set proxy.service.nodePorts.http=30010 codeveros nexus/codeveros'
+                           }
+     }
+}
