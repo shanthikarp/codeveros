@@ -29,7 +29,7 @@ podTemplate(
       image: 'alpine/helm:3.5.0',
       command: 'cat',
       ttyEnabled: true
-    )
+    ),
     containerTemplate(
       name: 'puppeteer',
       image: 'buildkite/puppeteer:8.0.0',

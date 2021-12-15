@@ -53,9 +53,11 @@ podTemplate(
           stage('Lint') {
            sh 'npm run checkstyle'
           }
-          stage('Unit Test') {
-          sh 'npm run test'
-          }
+        }
+        container('puppeteer') {
+           stage('Unit Test') {
+           sh 'npm run test'
+           }
         }
         container('sonar-scanner') {
             stage('Publish Analysis Results') {
