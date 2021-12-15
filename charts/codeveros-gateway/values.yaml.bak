@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: 172.31.49.218:30006/coveros/codeveros-gateway
-  pullPolicy: Always
+  repository: ghcr.io/coveros/codeveros-gateway
+  pullPolicy: IfNotPresent
   tag: ""
 
 nameOverride: ""
