@@ -45,10 +45,10 @@ podTemplate(
           sh 'npm ci --quiet'
           }
           stage('Lint') {
-           sh 'npm run checkstyle'
+          sh 'npm run checkstyle:ci'
           }
           stage('Unit Test') {
-          sh 'npm run test'
+          sh 'npm run test-ci'
           }
         }
         container('sonar-scanner') {
@@ -56,11 +56,6 @@ podTemplate(
             withSonarQubeEnv('sonarqube') {
             sh "sonar-scanner"
             }
-            }
-        }
-        container('nodejs') {
-         stage('Build App') {
-         sh 'npm run build.production'
             }
         }
         container('docker') {
