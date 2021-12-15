@@ -36,7 +36,9 @@ podTemplate(
   ]
 ) {
   node(POD_LABEL) {
-      stage('Checkout code') {}
+      stage('Checkout code') {
+            checkout scm
+          }
       dir(servicePath) {
         container('nodejs') {
           stage('Install NPM Dependencies') {
