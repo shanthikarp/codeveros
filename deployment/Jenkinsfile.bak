@@ -1,0 +1,2 @@
+def helmRepoUrl = 'http://172.31.49.218:30002/repository/helm-private/'
+def chartPath = 'charts/codeveros'

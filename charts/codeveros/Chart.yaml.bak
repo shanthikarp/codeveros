@@ -10,20 +10,20 @@ maintainers:
     email: justin.hollingsworth@coveros.com
 dependencies:
   - name: codeveros-user-service
-    version: 1.0.0
-    repository: http://172.31.49.218:30002/repository/helm-private/
+    version: 0.6.0
+    repository: https://coveros.github.io/codeveros
   - name: codeveros-training-service
-    version: 1.0.0
-    repository: http://172.31.49.218:30002/repository/helm-private/
+    version: 0.6.0
+    repository: https://coveros.github.io/codeveros
   - name: codeveros-auth-service
-    version: 1.0.0
-    repository: http://172.31.49.218:30002/repository/helm-private/
+    version: 0.6.0
+    repository: https://coveros.github.io/codeveros
   - name: codeveros-gateway
-    version: 1.0.0
-    repository: http://172.31.49.218:30002/repository/helm-private/
+    version: 0.7.0
+    repository: https://coveros.github.io/codeveros
   - name: codeveros-ui
-    version: 1.0.0
-    repository: http://172.31.49.218:30002/repository/helm-private/
+    version: 0.9.0
+    repository: https://coveros.github.io/codeveros
   - name: nginx
     version: 8.5.3
     repository: https://charts.bitnami.com/bitnami
