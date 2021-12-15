@@ -30,6 +30,12 @@ podTemplate(
       command: 'cat',
       ttyEnabled: true
     )
+    containerTemplate(
+      name: 'puppeteer',
+      image: 'buildkite/puppeteer:8.0.0',
+      command: 'cat',
+      ttyEnabled: true
+    )
   ],
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
@@ -45,10 +51,10 @@ podTemplate(
           sh 'npm ci --quiet'
           }
           stage('Lint') {
-          sh 'npm run checkstyle:ci'
+           sh 'npm run checkstyle'
           }
           stage('Unit Test') {
-          sh 'npm run test-ci'
+          sh 'npm run test'
           }
         }
         container('sonar-scanner') {
@@ -56,6 +62,11 @@ podTemplate(
             withSonarQubeEnv('sonarqube') {
             sh "sonar-scanner"
             }
+            }
+        }
+        container('nodejs') {
+         stage('Build App') {
+         sh 'npm run build.production'
             }
         }
         container('docker') {
