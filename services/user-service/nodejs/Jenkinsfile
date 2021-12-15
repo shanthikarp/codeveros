@@ -76,7 +76,7 @@ podTemplate(
             )
             ]) {
             sh """
-            cd /home/jenkins/agent/workspace/
+            cd /home/jenkins/agent/workspace/charts/codeveros-user-service
             helm lint ${chartPath}
             apk --no-cache add curl
              helm dependency build ${chartPath}
