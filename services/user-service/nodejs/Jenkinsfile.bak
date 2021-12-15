@@ -76,6 +76,7 @@ podTemplate(
             )
             ]) {
             sh """
+            pwd
             helm lint ${chartPath}
             apk --no-cache add curl
              helm dependency build ${chartPath}
