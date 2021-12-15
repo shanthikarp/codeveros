@@ -34,6 +34,7 @@ podTemplate(containers: [
      }
      stage('Build Helm Chart') {}
      stage('Deploy Chart') {
+      pwd
       sh "helm repo add nexus ${helmRepoUrl}"
        sh 'helm repo update'
       sh 'helm upgrade --install --wait --set proxy.service.nodePorts.http=30010 codeveros nexus/codeveros'
